@@ -1,0 +1,51 @@
+FILE SYSTEM INFORMATION
+--------------------------------------------
+File System Type: Ext2
+Volume Name: 
+Volume ID: 5e4c91cc668116b8734ec278ebdea803
+
+Last Written at: Fri May 18 12:28:43 2012
+Last Checked at: Fri May 18 12:26:56 2012
+
+Last Mounted at: Fri May 18 12:28:14 2012
+Unmounted properly
+Last mounted on: 
+
+Source OS: Linux
+Dynamic Structure
+Compat Features: Ext Attributes, Resize Inode, Dir Index
+InCompat Features: Filetype, 
+Read Only Compat Features: Sparse Super, 
+
+METADATA INFORMATION
+--------------------------------------------
+Inode Range: 1 - 185
+Root Directory: 2
+Free Inodes: 173
+
+CONTENT INFORMATION
+--------------------------------------------
+Block Range: 0 - 1439
+Block Size: 1024
+Reserved Blocks Before Block Groups: 1
+Free Blocks: 1393
+
+BLOCK GROUP INFORMATION
+--------------------------------------------
+Number of Block Groups: 1
+Inodes per group: 184
+Blocks per group: 8192
+
+Group: 0:
+  Inode Range: 1 - 184
+  Block Range: 1 - 1439
+  Layout:
+    Super Block: 1 - 1
+    Group Descriptor Table: 2 - 2
+    Data bitmap: 8 - 8
+    Inode bitmap: 9 - 9
+    Inode Table: 10 - 32
+    Data Blocks: 33 - 1439
+  Free Inodes: 173 (17300%)
+  Free Blocks: 1393 (96%)
+  Total Directories: 2
