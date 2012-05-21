@@ -126,7 +126,13 @@ void countBlocksStats(unsigned group_number) {
 		rest = 0;
 	}
 
-	unsigned to_read = count + rest;
+	/*
+	 * if (rest != 0) // rest=1,2,3,4,5,6,7
+	 * 	!!rest == 1
+	 * else // rest=0
+	 * 	!!rest == 0
+	 */
+	unsigned to_read = count + !!rest;
 	char buffer[to_read];
 
 	if (read(fd, buffer, sizeof(buffer)) != sizeof(buffer)) {
