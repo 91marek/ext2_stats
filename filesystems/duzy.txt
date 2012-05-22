@@ -1,0 +1,101 @@
+FILE SYSTEM INFORMATION
+--------------------------------------------
+File System Type: Ext2
+Volume Name: 
+Volume ID: dd6106388b57e8b6b943f613445b45c4
+
+Last Written at: Tue May 22 21:58:11 2012
+Last Checked at: Tue May 22 21:58:11 2012
+
+Last Mounted at: emptyUnmounted properly
+Last mounted on: 
+
+Source OS: Linux
+Dynamic Structure
+Compat Features: Ext Attributes, Resize Inode, Dir Index
+InCompat Features: Filetype, 
+Read Only Compat Features: Sparse Super, 
+
+METADATA INFORMATION
+--------------------------------------------
+Inode Range: 1 - 37521
+Root Directory: 2
+Free Inodes: 37509
+
+CONTENT INFORMATION
+--------------------------------------------
+Block Range: 0 - 74997
+Block Size: 2048
+Free Blocks: 72408
+
+BLOCK GROUP INFORMATION
+--------------------------------------------
+Number of Block Groups: 5
+Inodes per group: 7504
+Blocks per group: 16384
+
+Group: 0:
+  Inode Range: 1 - 7504
+  Block Range: 0 - 16383
+  Layout:
+    Super Block: 0 - 0
+    Group Descriptor Table: 1 - 1
+    Data bitmap: 75 - 75
+    Inode bitmap: 76 - 76
+    Inode Table: 77 - 545
+    Data Blocks: 546 - 16383
+  Free Inodes: 7493 (99%)
+  Free Blocks: 15828 (96%)
+  Total Directories: 2
+
+Group: 1:
+  Inode Range: 7505 - 15008
+  Block Range: 16384 - 32767
+  Layout:
+    Super Block: 16384 - 16384
+    Group Descriptor Table: 16385 - 16385
+    Data bitmap: 16459 - 16459
+    Inode bitmap: 16460 - 16460
+    Inode Table: 16461 - 16929
+    Data Blocks: 16930 - 32767
+  Free Inodes: 7504 (100%)
+  Free Blocks: 15838 (96%)
+  Total Directories: 0
+
+Group: 2:
+  Inode Range: 15009 - 22512
+  Block Range: 32768 - 49151
+  Layout:
+    Data bitmap: 32768 - 32768
+    Inode bitmap: 32769 - 32769
+    Inode Table: 32770 - 33238
+    Data Blocks: 32770 - 32769, 33239 - 49151
+  Free Inodes: 7504 (100%)
+  Free Blocks: 15913 (97%)
+  Total Directories: 0
+
+Group: 3:
+  Inode Range: 22513 - 30016
+  Block Range: 49152 - 65535
+  Layout:
+    Super Block: 49152 - 49152
+    Group Descriptor Table: 49153 - 49153
+    Data bitmap: 49227 - 49227
+    Inode bitmap: 49228 - 49228
+    Inode Table: 49229 - 49697
+    Data Blocks: 49698 - 65535
+  Free Inodes: 7504 (100%)
+  Free Blocks: 15838 (96%)
+  Total Directories: 0
+
+Group: 4:
+  Inode Range: 30017 - 37520
+  Block Range: 65536 - 74997
+  Layout:
+    Data bitmap: 65536 - 65536
+    Inode bitmap: 65537 - 65537
+    Inode Table: 65538 - 66006
+    Data Blocks: 65538 - 65537, 66007 - 74997
+  Free Inodes: 7504 (750400%)
+  Free Blocks: 8991 (95%)
+  Total Directories: 0

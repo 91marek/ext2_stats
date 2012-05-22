@@ -10,10 +10,12 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#define SUPER_BLOCK_OFF 1024
+
 int fd; // deskryptor otwieranego pliku
 struct ext2_super_block sb; // superblok
 struct ext2_group_desc* gd_tab; // tablica deskryptorow grup
-unsigned block_size; // rozmiar bloku odczytany z superbloku
+unsigned block_size; // rozmiar bloku obliczony na podstawie superbloku
 unsigned blocks_per_group; // liczba blokow w grupie odczytana z superbloku
 unsigned inodes_per_group; // liczba inodow w grupie odczytana z superbloku
 unsigned groups_count = 0; // obliczona liczba grup
@@ -40,7 +42,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	// przesuniecie na poczatek superbloku
-	if (lseek(fd, 1024, SEEK_SET) != 1024) {
+	if (lseek(fd, SUPER_BLOCK_OFF, SEEK_SET) != 1024) {
 		fprintf(stderr, "Blad ustawiania offsetu na poczatek superbloku\n");
 		close(fd);
 		return EXIT_FAILURE;
@@ -53,24 +55,20 @@ int main(int argc, char* argv[]) {
 	}
 
 	printf("############Z SUPERBLOKU########################\n");
-
-	block_size = 1024 << sb.s_log_block_size;
+	block_size = SUPER_BLOCK_OFF << sb.s_log_block_size;
 	printf("Rozmiar bloku: %d\n", block_size);
-
 	blocks_per_group = sb.s_blocks_per_group;
 	printf("Liczba blokow w jednej grupie: %d\n", blocks_per_group);
-
 	inodes_per_group = sb.s_inodes_per_group;
 	printf("Liczba inodow w jednej grupie: %d\n", inodes_per_group);
 
 	printf("############OBLICZONE###########################\n");
-
 	groups_count = sb.s_blocks_count / blocks_per_group;
 	if (sb.s_blocks_count % blocks_per_group != 0)
 		++groups_count;
 	printf("Liczba grup: %d\n", groups_count);
 
-	// odczytanie deskryptorow wszystkich grup
+	// utworzenie tablicy na deskryptory wszystkich grup
 	gd_tab = (struct ext2_group_desc*) malloc(
 			sizeof(struct ext2_group_desc) * groups_count);
 	if (NULL == gd_tab) {
@@ -78,6 +76,7 @@ int main(int argc, char* argv[]) {
 		close(fd);
 		return EXIT_FAILURE;
 	}
+	// odczytanie deskryptorow wszystkich grup (bezposrednio za superblokiem)
 	if (read(fd, gd_tab, sizeof(struct ext2_group_desc) * groups_count)
 			!= sizeof(struct ext2_group_desc) * groups_count) {
 		fprintf(stderr, "Blad odczytu deskryptorow grup\n");
@@ -119,8 +118,10 @@ void countBlocksStats(unsigned group_number) {
 
 	unsigned count, rest;
 	if (group_number == groups_count - 1) { // ostatnia grupa
-		count = (sb.s_blocks_count - blocks_per_group * (groups_count - 1)) / 8;
-		rest = (sb.s_blocks_count - blocks_per_group * (groups_count - 1)) % 8;
+		unsigned blocks_per_last_group = sb.s_blocks_count - sb.s_first_data_block
+				- blocks_per_group * (groups_count - 1);
+		count = blocks_per_last_group / 8;
+		rest = blocks_per_last_group % 8;
 	} else {
 		count = blocks_per_group / 8;
 		rest = 0;

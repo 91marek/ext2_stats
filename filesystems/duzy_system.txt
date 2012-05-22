@@ -1,0 +1,76 @@
+FILE SYSTEM INFORMATION
+--------------------------------------------
+File System Type: Ext2
+Volume Name: 
+Volume ID: f2e7f0b8b5a61d806744505a26d6c446
+
+Last Written at: Sun May 20 16:04:49 2012
+Last Checked at: Sun May 20 16:04:49 2012
+
+Last Mounted at: emptyUnmounted properly
+Last mounted on: 
+
+Source OS: Linux
+Dynamic Structure
+Compat Features: Ext Attributes, Resize Inode, Dir Index
+InCompat Features: Filetype, 
+Read Only Compat Features: Sparse Super, 
+
+METADATA INFORMATION
+--------------------------------------------
+Inode Range: 1 - 5017
+Root Directory: 2
+Free Inodes: 5005
+
+CONTENT INFORMATION
+--------------------------------------------
+Block Range: 0 - 19999
+Block Size: 1024
+Reserved Blocks Before Block Groups: 1
+Free Blocks: 19192
+
+BLOCK GROUP INFORMATION
+--------------------------------------------
+Number of Block Groups: 3
+Inodes per group: 1672
+Blocks per group: 8192
+
+Group: 0:
+  Inode Range: 1 - 1672
+  Block Range: 1 - 8192
+  Layout:
+    Super Block: 1 - 1
+    Group Descriptor Table: 2 - 2
+    Data bitmap: 81 - 81
+    Inode bitmap: 82 - 82
+    Inode Table: 83 - 291
+    Data Blocks: 292 - 8192
+  Free Inodes: 1661 (99%)
+  Free Blocks: 7887 (96%)
+  Total Directories: 2
+
+Group: 1:
+  Inode Range: 1673 - 3344
+  Block Range: 8193 - 16384
+  Layout:
+    Super Block: 8193 - 8193
+    Group Descriptor Table: 8194 - 8194
+    Data bitmap: 8273 - 8273
+    Inode bitmap: 8274 - 8274
+    Inode Table: 8275 - 8483
+    Data Blocks: 8484 - 16384
+  Free Inodes: 1672 (100%)
+  Free Blocks: 7901 (96%)
+  Total Directories: 0
+
+Group: 2:
+  Inode Range: 3345 - 5016
+  Block Range: 16385 - 19999
+  Layout:
+    Data bitmap: 16385 - 16385
+    Inode bitmap: 16386 - 16386
+    Inode Table: 16387 - 16595
+    Data Blocks: 16387 - 16386, 16596 - 19999
+  Free Inodes: 1672 (167200%)
+  Free Blocks: 3404 (94%)
+  Total Directories: 0
