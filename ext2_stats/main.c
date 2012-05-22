@@ -180,12 +180,11 @@ void countInodesStats(unsigned group_number) {
 		exit(EXIT_FAILURE);
 	}
 
-	// TODO ile jest inodow w ostatniej grupie blokow?
 	unsigned count, rest;
 	count = inodes_per_group / 8;
 	rest = inodes_per_group % 8;
 
-	unsigned to_read = count + rest;
+	unsigned to_read = count + !!rest;
 	char buffer[to_read];
 
 	if (read(fd, buffer, sizeof(buffer)) != sizeof(buffer)) {
