@@ -17,6 +17,7 @@ struct ext2_super_block sb; // superblok
 struct ext2_group_desc* gd_tab; // tablica deskryptorow grup
 unsigned block_size; // rozmiar bloku obliczony na podstawie superbloku
 unsigned blocks_per_group; // liczba blokow w grupie odczytana z superbloku
+unsigned blocks_per_last_group = 0;	// obliczona liczba blokow w ostatniej grupie
 unsigned inodes_per_group; // liczba inodow w grupie odczytana z superbloku
 unsigned groups_count = 0; // obliczona liczba grup
 unsigned all_blocks = 0; // obliczona liczba wszystkich blokow
@@ -42,7 +43,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	// przesuniecie na poczatek superbloku
-	if (lseek(fd, SUPER_BLOCK_OFF, SEEK_SET) != 1024) {
+	if (lseek(fd, SUPER_BLOCK_OFF, SEEK_SET) != SUPER_BLOCK_OFF) {
 		fprintf(stderr, "Blad ustawiania offsetu na poczatek superbloku\n");
 		close(fd);
 		return EXIT_FAILURE;
@@ -55,17 +56,29 @@ int main(int argc, char* argv[]) {
 	}
 
 	printf("############Z SUPERBLOKU########################\n");
-	block_size = SUPER_BLOCK_OFF << sb.s_log_block_size;
+	block_size = 1024 << sb.s_log_block_size;
 	printf("Rozmiar bloku: %d\n", block_size);
-	blocks_per_group = sb.s_blocks_per_group;
-	printf("Liczba blokow w jednej grupie: %d\n", blocks_per_group);
 	inodes_per_group = sb.s_inodes_per_group;
 	printf("Liczba inodow w jednej grupie: %d\n", inodes_per_group);
+	blocks_per_group = sb.s_blocks_per_group;
+	printf("Liczba blokow w jednej grupie: %d\n", blocks_per_group);
 
 	printf("############OBLICZONE###########################\n");
-	groups_count = sb.s_blocks_count / blocks_per_group;
-	if (sb.s_blocks_count % blocks_per_group != 0)
+	unsigned tmp_blocks_count;
+	tmp_blocks_count = sb.s_blocks_count;		// liczba wszystkich blokow
+	tmp_blocks_count -= sb.s_first_data_block;	// odjecie liczby zarezerwowanych blokow
+	// obliczenie liczby pelnych grup
+	groups_count = tmp_blocks_count / blocks_per_group;
+	// doliczenie ewentualnej niepelnej grupy
+	// obliczenie liczby blokow w ostatniej grupie
+	unsigned rest;
+	rest = tmp_blocks_count % blocks_per_group;
+	if (rest != 0) {
+		blocks_per_last_group = rest;
 		++groups_count;
+	} else {
+		blocks_per_last_group = blocks_per_group;
+	}
 	printf("Liczba grup: %d\n", groups_count);
 
 	// utworzenie tablicy na deskryptory wszystkich grup
@@ -89,16 +102,16 @@ int main(int argc, char* argv[]) {
 	unsigned i = 0;
 	for (; i < groups_count; ++i) {
 		printf("Grupa: %d\n", i);
-		countBlocksStats(i);
 		countInodesStats(i);
+		countBlocksStats(i);
 	}
 
 	// wypisanie obliczonych statystyk ogolnych
 	printf("############OBLICZONE OGOLNE####################\n");
-	printf("Liczba wszystkich blokow: %d\n", all_blocks);
-	printf("Liczba wszystkich wolnych blokow: %d\n", all_free_blocks);
 	printf("Liczba wszystkich inodow: %d\n", all_inodes);
 	printf("Liczba wszystkich wolnych inodow: %d\n", all_free_inodes);
+	printf("Liczba wszystkich blokow: %d\n", all_blocks);
+	printf("Liczba wszystkich wolnych blokow: %d\n", all_free_blocks);
 
 	// zwolnienie pamieci i zamkniecie deskryptora
 	free(gd_tab);
@@ -118,13 +131,11 @@ void countBlocksStats(unsigned group_number) {
 
 	unsigned count, rest;
 	if (group_number == groups_count - 1) { // ostatnia grupa
-		unsigned blocks_per_last_group = sb.s_blocks_count - sb.s_first_data_block
-				- blocks_per_group * (groups_count - 1);
 		count = blocks_per_last_group / 8;
 		rest = blocks_per_last_group % 8;
 	} else {
 		count = blocks_per_group / 8;
-		rest = 0;
+		rest = blocks_per_group % 8;
 	}
 
 	/*
