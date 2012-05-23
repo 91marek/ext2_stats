@@ -1,0 +1,36 @@
+############Z SUPERBLOKU########################
+Rozmiar bloku: 2048
+Liczba inodow w jednej grupie: 7504
+Liczba blokow w jednej grupie: 16384
+############OBLICZONE###########################
+Liczba grup: 5
+Grupa: 0
+Liczba inodow w grupie: 7504
+Liczba wolnych inodow w grupie: 7493
+Liczba blokow w grupie: 16384
+Liczba wolnych blokow w grupie: 15828
+Grupa: 1
+Liczba inodow w grupie: 7504
+Liczba wolnych inodow w grupie: 7504
+Liczba blokow w grupie: 16384
+Liczba wolnych blokow w grupie: 15838
+Grupa: 2
+Liczba inodow w grupie: 7504
+Liczba wolnych inodow w grupie: 7504
+Liczba blokow w grupie: 16384
+Liczba wolnych blokow w grupie: 15913
+Grupa: 3
+Liczba inodow w grupie: 7504
+Liczba wolnych inodow w grupie: 7504
+Liczba blokow w grupie: 16384
+Liczba wolnych blokow w grupie: 15838
+Grupa: 4
+Liczba inodow w grupie: 7504
+Liczba wolnych inodow w grupie: 7504
+Liczba blokow w grupie: 9462
+Liczba wolnych blokow w grupie: 8991
+############OBLICZONE OGOLNE####################
+Liczba wszystkich inodow: 37520
+Liczba wszystkich wolnych inodow: 37509
+Liczba wszystkich blokow: 74998
+Liczba wszystkich wolnych blokow: 72408

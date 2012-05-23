@@ -1,0 +1,16 @@
+############Z SUPERBLOKU########################
+Rozmiar bloku: 1024
+Liczba inodow w jednej grupie: 184
+Liczba blokow w jednej grupie: 8192
+############OBLICZONE###########################
+Liczba grup: 1
+Grupa: 0
+Liczba inodow w grupie: 184
+Liczba wolnych inodow w grupie: 173
+Liczba blokow w grupie: 1435
+Liczba wolnych blokow w grupie: 1389
+############OBLICZONE OGOLNE####################
+Liczba wszystkich inodow: 184
+Liczba wszystkich wolnych inodow: 173
+Liczba wszystkich blokow: 1435
+Liczba wszystkich wolnych blokow: 1389
